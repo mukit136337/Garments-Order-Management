@@ -1,0 +1,150 @@
+create database Garments_V2;
+use Garments_V2;
+
+CREATE TABLE client (
+	client_id varchar(10) primary key NOT NULL,
+	company_name varchar(30),
+	email varchar(100),
+	contact_num varchar(20),
+	type varchar(10) NOT NULL,
+	location varchar(1000)
+);
+
+CREATE TABLE order_list (
+	client_id varchar(10),
+	style_num varchar(10) primary key,
+	unit_price decimal(10,2),
+	cost decimal(10,2),
+	order_placement_date date,
+	time_of_delivery date,
+	description varchar(1000),
+	status varchar(10),
+	foreign key(client_id) references client(client_id)
+);
+
+CREATE TABLE quantity (
+	style_num varchar(10),
+	color varchar(30),
+	size int,
+	quantity int,
+	primary key(style_num,color,size),
+	foreign key(style_num) references order_list(style_num)
+);
+
+
+
+CREATE TABLE production (
+	style_num varchar(10),
+	color varchar(10),
+	size int,
+	date date,
+	production int,
+	primary key(style_num,color,size,date),
+	foreign key(style_num) references order_list(style_num)
+);
+
+CREATE TABLE materials (
+	style_num varchar(10),
+	name varchar(30),
+	stock decimal,
+	consumption decimal,
+	price decimal,
+	type varchar(30),
+	description varchar(1000),
+	primary key(style_num,name),
+	foreign key(style_num) references order_list(style_num)
+);
+
+CREATE TABLE supply (
+	client_id varchar(10),
+	style_num varchar(10),
+	name varchar(30),
+	primary key(client_id,style_num,name),
+	foreign key(client_id) references client(client_id),
+	foreign key(style_num,name) references materials(style_num,name)
+);
+
+CREATE TABLE users(
+	user_id varchar(30) primary key,
+	password varchar(30),
+	dept varchar(20),
+	name varchar(30)
+);
+
+
+insert into client values
+('I-001','Little','little@gmail.com','029123971','Buyer','Gulshan, Dhaka.'),
+('I-002','Big','big@gmail.com','021458745','Buyer','Uttara, Dhaka.'),
+('JX-007','Agent Association','agent007@agent.com','0125879516','Supplier','Mohammadpur, Dhaka.');
+
+insert into order_list values
+('I-001','X-34',100,70,'2020-01-25','2020-02-11','yellow and red,shirt', 'Buyer'),
+('I-002','X-64',150,120.38'2019-12-20','2020-01-05','Blue, shirt','Buyer'),
+('I-001','X-23',75,62'2020-02-29','2020-03-20','Grey, jeans,pant','Supplier');
+
+insert into quantity values
+('X-34','yellow',2,300),
+('X-34','yellow',3,300),
+('X-34','yellow',4,300),
+('X-34','red',1,150),
+('X-34','red',2,150),
+('X-34','red',3,150),
+('X-64','blue',2,230),
+('X-64','blue',3,230),
+('X-64','blue',4,230),
+('X-23','Grey',2,250),
+('X-23','Grey',1,250),
+('X-23','Grey',4,250);
+
+insert into production values
+('X-34','yellow',2,'2020-01-26',350),
+('X-64','blue',2,'2020-01-26',315),
+('X-34','red',2,'2020-01-26',450),
+('X-23','Grey',2,'2020-01-26',408),
+('X-34','yellow',3,'2020-01-27',400),
+('X-64','blue',3,'2020-01-27',378),
+('X-34','red',3,'2020-01-27',450),
+('X-23','Grey',1,'2020-01-27',388),
+('X-34','yellow',4,'2020-01-28',400),
+('X-64','blue',4,'2020-01-28',378),
+('X-34','red',1,'2020-01-28',450),
+('X-23','Grey',4,'2020-01-28',388);
+
+
+
+insert into materials values
+('X-34','cotton',78.45,1.21,35,'Fabric','Nothing for now'),
+('X-34','pl-btn',700,13,2,'Button','Nothing for now'),
+('X-34','Coller',120,1,5,'Coller','Nothing for now'),
+('X-34','Price-Tag',150,1,2.5,'Label','Nothing for now'),
+('X-64','cotton',78.45,1.21,35,'Fabric','Nothing for now'),
+('X-64','pl-btn',700,13,2,'Button','Nothing for now'),
+('X-64','Coller',120,1,5,'Coller','Nothing for now'),
+('X-64','Price-Tag',150,1,2.5,'Label','Nothing for now'),
+('X-23','cotton',78.45,1.21,35,'Fabric','Nothing for now'),
+('X-23','pl-btn',700,13,2,'Button','Nothing for now'),
+('X-23','Coller',120,1,5,'Coller','Nothing for now'),
+('X-23','Price-Tag',150,1,2.5,'Label','Nothing for now');
+
+insert into supply values
+('JX-007','X-34','cotton'),
+('JX-007','X-34','pl-btn'),
+('JX-007','X-34','Coller'),
+('JX-007','X-34','Price-Tag'),
+('JX-007','X-64','cotton'),
+('JX-007','X-64','pl-btn'),
+('JX-007','X-64','Coller'),
+('JX-007','X-64','Price-Tag'),
+('JX-007','X-23','cotton'),
+('JX-007','X-23','pl-btn'),
+('JX-007','X-23','Coller'),
+('JX-007','X-23','Price-Tag');
+
+
+insert into users values 
+('admin','admin','TopManagement','Admin'),
+('arman','ar12345','Production_dept','Arman Hossain'),
+('anuska','anu12345','Commercial_dept','Afia Hossain'),
+('prince','pri12345','Store_dept','Rafsan Ferdous'),
+('mukit','mk12345','Marchendiser_dept','Mukit Kibria');
+
