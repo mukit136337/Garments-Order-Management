@@ -15,8 +15,21 @@
 
 	id: arman pass: ar12345
 		for Production_dept point of view
+		
+
+-----------------------------------------------What Can be Done------------------------------------
+TopManagement-> 
+	View All 3 types of order
+	Change the Status of an Order
+	Add new credentials(Missing)
+Marchendiser_dept->
+	Add new Client
+	Add new Orders
+	Update an existing Order(Missing)
+Production_dept->
+	Add daily production
 
 
 
 
-Some of the features are still not available due the pressure of BUX!
+!!Some of the features are still not available due the pressure of BUX!!
