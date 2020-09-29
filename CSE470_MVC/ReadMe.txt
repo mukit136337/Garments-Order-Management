@@ -15,6 +15,7 @@
 
 	id: arman pass: ar12345
 		for Production_dept point of view
+4. For unit testing, extracting the vendor.rar is mendatory
 		
 
 -----------------------------------------------What Can be Done------------------------------------
