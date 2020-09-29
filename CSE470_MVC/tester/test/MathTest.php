@@ -17,6 +17,6 @@ class MathTest extends MockeryTestCase
 						->once();
 		$length = 2;
 		$response = $this->math->getArea($length);
-		$this->assertEquals($response, 4);
+		$this->assertEquals(4, $response);
 	}
 }
