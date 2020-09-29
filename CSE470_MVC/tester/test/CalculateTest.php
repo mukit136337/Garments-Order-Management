@@ -9,6 +9,6 @@ class CalculateTest extends TestCase
 
 	public function testAreaOfSquare(){
 		$length = 2;
-		$this->assertEquals($this->calculate->areaOfSquare($length), 4);
+		$this->assertEquals(4, $this->calculate->areaOfSquare($length));
 	}
 }
